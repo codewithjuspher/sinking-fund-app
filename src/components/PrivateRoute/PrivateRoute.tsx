@@ -1,0 +1,24 @@
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
+
+interface PrivateRouteProps {
+    children: React.ReactNode;
+}
+
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+    const { isAuthenticated, loading } = useContext(AuthContext);
+
+    if (loading) {
+        return <div>Loading...</div>; // Show a loading spinner or skeleton while loading
+    }
+
+    if (!isAuthenticated) {
+        return <Navigate to="/" replace />;
+    }
+
+    return <>{children}</>;
+};
+
+export default PrivateRoute;
