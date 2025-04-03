@@ -11,7 +11,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
     const { isAuthenticated, loading } = useContext(AuthContext);
 
     if (loading) {
-        return <div>Loading...</div>; // Show a loading spinner or skeleton while loading
+        return <div>Loading...</div>;
     }
 
     if (!isAuthenticated) {

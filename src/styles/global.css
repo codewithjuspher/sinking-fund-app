@@ -17,7 +17,9 @@ body {
     box-sizing: border-box;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -27,5 +29,13 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+}
+
+footer {
+    background-color: #0a59ad;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
 }

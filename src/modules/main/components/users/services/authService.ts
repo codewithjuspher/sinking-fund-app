@@ -7,9 +7,6 @@ export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
 
-    const token = await result.user.getIdToken();
-    tokenHandler.set(token, 5);
-    scheduleTokenRefresh();
     return result.user;
   } catch (error) {
     console.error("Error during Google sign-in:", error);
@@ -24,7 +21,6 @@ export const refreshToken = async () => {
     if (user) {
       const refreshedToken = await user.getIdToken(true); 
       tokenHandler.set(refreshedToken, 5);
-      console.log("Token successfully refreshed");
     } else {
       console.error("No authenticated user found for token refresh.");
     }
@@ -56,7 +52,6 @@ export const logoutUser = async () => {
     await signOut(auth);
     localStorage.removeItem("tokenExpirationTime");
     localStorage.removeItem("authToken");
-    console.log("User successfully logged out");
     window.location.href = "/";
   } catch (error) {
     console.error("Error during logout:", error);

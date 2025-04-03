@@ -1,6 +1,6 @@
 export const tokenHandler = {
     set(token: string, expirationInMinutes: number = 5) {
-        const expiration = new Date().getTime() + expirationInMinutes * 60000; // Dynamic expiration time
+        const expiration = new Date().getTime() + expirationInMinutes * 60000;
         localStorage.setItem("authToken", token);
         localStorage.setItem("tokenExpirationTime", expiration.toString());
     },

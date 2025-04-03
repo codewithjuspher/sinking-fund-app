@@ -1,3 +1,6 @@
+import React from "react";
+import "@/styles/components/input.css";
+
 interface InputProps {
     label: string;
     type?: 'text' | 'password' | 'email' | 'number';
@@ -10,7 +13,7 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({
     label,
-    type = 'text',
+    type = '',
     value,
     onChange,
     placeholder = '',
@@ -18,7 +21,7 @@ const Input: React.FC<InputProps> = ({
     style = {},
 }) => (
     <div className={`flex flex-col gap-1`} style={style}>
-        <label className="text-gray-600 font-medium">{label}</label>
+        <label className="input-label">{label}</label>
         <input
             type={type}
             value={value}

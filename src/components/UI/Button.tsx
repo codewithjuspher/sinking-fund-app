@@ -1,30 +1,43 @@
-import React from 'react';
+import React from "react";
+import "@/styles/components/button.css";
 
 interface ButtonProps {
-    label: string;
     onClick?: () => void;
-    type?: 'button' | 'submit' | 'reset';
+    type?: "button" | "submit" | "reset";
     disabled?: boolean;
-    className?: string; 
+    className?: string;
+    ariaLabel?: string;
+    loading?: boolean;
+    children?: React.ReactNode | ((type: string) => React.ReactNode);
 }
 
 const Button: React.FC<ButtonProps> = ({
-    label,
     onClick,
-    type = 'button',
+    type = "button",
     disabled = false,
-    className = '',
-}) => (
-    <button
-        type={type}
-        onClick={onClick}
-        disabled={disabled}
-        className={`px-4 py-2 rounded-lg transition-colors 
-      ${disabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'} 
-      text-white ${className}`}
-    >
-        {label}
-    </button>
-);
-
+    className = "",
+    ariaLabel,
+    loading = false,
+    children,
+}) => {
+    return (
+        <button
+            type={type}
+            onClick={onClick}
+            disabled={disabled || loading}
+            aria-label={ariaLabel}
+            className={`transition ease-in-out duration-200 ${className}`}
+        >
+            {loading ? (
+                <span className="button-spinner">
+                    <span className="spinner-border animate-spin"></span> Loading...
+                </span>
+            ) : (
+                typeof children === "function"
+                    ? children(type)
+                    : children
+            )}
+        </button>
+    );
+};
 export default Button;

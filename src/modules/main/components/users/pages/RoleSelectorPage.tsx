@@ -1,12 +1,13 @@
+import Button from "@/components/UI/Button";
+import Input from "@/components/UI/Input";
+import { registeredOrganizations } from "@/modules/main/components/users/data/mockData";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { refreshToken } from "@/modules/users/services/authService";
-import { registeredOrganizations } from "@/modules/users/data/mockData";
-import "./RoleSelectorPage.css";
+import "../styles/RoleSelectorPage.css";
 
 const RoleSelectorPage: React.FC = () => {
     const [sinkingFundId, setSinkingFundId] = useState<string>("");
-    const [error, setError] = useState<string>("");
+    const [error, setError] = useState<string>(""); 
     const navigate = useNavigate();
 
     const isValidOrganization = (id: string): boolean => {
@@ -16,8 +17,6 @@ const RoleSelectorPage: React.FC = () => {
     const handleJoinSinkingFund = async () => {
         setError("");
 
-        await refreshToken(); 
-
         if (!sinkingFundId.trim()) {
             setError("Please provide a valid Sinking Fund ID.");
             return;
@@ -26,45 +25,50 @@ const RoleSelectorPage: React.FC = () => {
         if (isValidOrganization(sinkingFundId.trim())) {
             navigate(`/organization/${sinkingFundId.trim()}`);
         } else {
-            setError("The provided Sinking Fund ID does not exist.");
+            setError("The provided Sinking Fund Link does not exist.");
         }
     };
 
     const handleCreateNewOrganization = () => {
         setError("");
-        navigate("/create-organization");
+        navigate("/create-organization")
     };
 
     return (
         <div className="role-selector-container">
             <h1 className="role-selector-title">Choose Your Sinking Fund Path</h1>
+
             <div className="input-group">
-                <input
+                <Input
+                    label="Sinking Fund Link"
                     type="text"
-                    placeholder="Enter Sinking Fund ID"
                     value={sinkingFundId}
                     onChange={(e) => {
                         setSinkingFundId(e.target.value);
                         if (error) setError("");
                     }}
-                    className={`input-field ${error ? "input-error" : ""}`} 
+                    placeholder=""
+                    className={`input-field ${error ? "input-error" : ""}`}
                 />
                 {error && <p className="error-message">{error}</p>}
             </div>
+
             <div className="button-group">
-                <button
+                <Button
                     onClick={handleJoinSinkingFund}
-                    className="btn btn-primary"
+                    type="button"
                     disabled={!sinkingFundId.trim()}
+                    className="btn btn-primary px-4 py-2 rounded-lg"
                 >
                     Join Existing Sinking Fund
-                </button>
-                <button
+                </Button>
+                <Button
                     onClick={handleCreateNewOrganization}
-                    className="btn btn-secondary"
+                    type="button"
+                    className="btn btn-secondary px-4 py-2 rounded-lg"
                 >
                     Create New Sinking Fund Organization
-                </button>
+                </Button>
             </div>
         </div>
     );

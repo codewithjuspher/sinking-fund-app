@@ -11,24 +11,24 @@ export const registeredUsers = [
         email: "juspher.balangyao@mlhuillier.com",
         sinkingFundId: "SF123",
         organizationName: "Alpha Corp",
-        role: "manager",
+        userRole: "Admin",
     },
     {
         email: "john.doe@gmail.com",
         sinkingFundId: "SF123",
         organizationName: "Alpha Corp",
-        role: "manager",
+        userRole: "Admin",
     },
     {
         email: "jane.smith@gmail.com",
         sinkingFundId: "SF456",
         organizationName: "Beta Systems",
-        role: "member",
+        userRole: "member",
     },
     {
         email: "alice.williams@gmail.com",
         sinkingFundId: "SF789",
         organizationName: "Gamma Enterprises",
-        role: "member",
+        userRole: "member",
     },
 ];

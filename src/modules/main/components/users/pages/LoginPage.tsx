@@ -1,5 +1,5 @@
 import React from 'react';
-import SSOProvider from '@/modules/users/components/SSOProvider';
+import SSOProvider from '@/modules/main/components/users/components/SSOProvider';
 import Card from '@/components/UI/Card';
 
 const LoginPage: React.FC = () => {

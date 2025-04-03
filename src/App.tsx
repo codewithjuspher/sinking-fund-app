@@ -1,58 +1,52 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/Layout/Layout";
-import LoginPage from "@/modules/users/pages/LoginPage";
-import RoleSelectorPage from "@/modules/users/pages/RoleSelectorPage";
-import OrganizationPage from "@/modules/users/pages/OrganizationPage";
-import CreateOrganizationPage from "@/modules/users/pages/CreateOrganizationPage";
-import { checkTokenExpiration, scheduleTokenRefresh } from "@/modules/users/services/authService";
+import PrivateRoute from "@/components/Private/PrivateRoute";
 import { AuthProvider } from "@/context/AuthContext";
-import PrivateRoute from "@/components/PrivateRoute/PrivateRoute";
-import "@/styles/global.css";
+import CreateOrganizationPage from "@/modules/main/components/users/pages/CreateOrganizationPage";
+import LoginPage from "@/modules/main/components/users/pages/LoginPage";
+import OrganizationPage from "@/modules/main/pages/OrganizationPage";
+import RoleSelectorPage from "@/modules/main/components/users/pages/RoleSelectorPage";
+import "@/styles/global.css"
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { UserProvider } from "@/context/UserContext";
 
 const App: React.FC = () => {
-    useEffect(() => {
-        scheduleTokenRefresh();
-        const interval = setInterval(() => {
-            checkTokenExpiration();
-        }, 60000);
-
-        return () => clearInterval(interval);
-    }, []);
 
     return (
         <AuthProvider>
-            <BrowserRouter>
-                <Layout>
-                    <Routes>
-                        <Route path="/" element={<LoginPage />} />
-                        <Route
-                            path="/path"
-                            element={
-                                <PrivateRoute>
-                                    <RoleSelectorPage />
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/organization/:id"
-                            element={
-                                <PrivateRoute>
-                                    <OrganizationPage />
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route
-                            path="/create-organization"
-                            element={
-                                <PrivateRoute>
-                                    <CreateOrganizationPage />
-                                </PrivateRoute>
-                            }
-                        />
-                    </Routes>
-                </Layout>
-            </BrowserRouter>
+            <UserProvider>
+                <BrowserRouter>
+                    <Layout>
+                        <Routes>
+                            <Route path="/" element={<LoginPage />} />
+                            <Route
+                                path="/path"
+                                element={
+                                    <PrivateRoute>
+                                        <RoleSelectorPage />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/organization/:id"
+                                element={
+                                    <PrivateRoute>
+                                        <OrganizationPage />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/create-organization"
+                                element={
+                                    <PrivateRoute>
+                                        <CreateOrganizationPage />
+                                    </PrivateRoute>
+                                }
+                            />
+                        </Routes>
+                    </Layout>
+                </BrowserRouter>
+            </UserProvider>
         </AuthProvider>
     );
 };

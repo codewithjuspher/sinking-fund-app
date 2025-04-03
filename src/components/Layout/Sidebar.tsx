@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useState } from "react";
+import { menuItems } from "@/config/menuConfig";
+import MenuItem from "./MenuItem";
+import styles from "@/styles/sidebar.module.css";
 
-const Sidebar: React.FC = () => (
-  <aside className="w-64 bg-gray-100 p-4">
-    <ul>
-      <li><a href="/">Dashboard</a></li>
-      <li><a href="/create-fund">Create Fund</a></li>
-      <li><a href="/join-fund">Join Fund</a></li>
-    </ul>
-  </aside>
-);
+const Sidebar: React.FC = () => {
+    const [activeParent, setActiveParent] = useState<string | null>("Dashboard");
+
+    const toggleDropdown = (parentName: string) => {
+        setActiveParent((prev) => (prev === parentName ? null : parentName));
+    };
+
+    return (
+        <aside className={styles.sidebar}>
+            <nav>
+                <ul className={styles.menuList}>
+                    {menuItems.map((item) => (
+                        <MenuItem
+                            key={item.name}
+                            name={item.name}
+                            children={item.children}
+                            activeParent={activeParent}
+                            toggleDropdown={toggleDropdown}
+                        />
+                    ))}
+                </ul>
+            </nav>
+        </aside>
+    );
+};
 
 export default Sidebar;

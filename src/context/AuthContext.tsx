@@ -5,26 +5,26 @@ import React, { createContext, useEffect, useState } from "react";
 interface AuthContextProps {
     isAuthenticated: boolean;
     user: User | null;
-    loading: boolean; // Track loading state
+    loading: boolean;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
     isAuthenticated: false,
     user: null,
-    loading: true, // Default to loading on initial render
+    loading: true,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true); // To ensure app doesn't flash login state
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((currentUser) => {
             setUser(currentUser);
-            setLoading(false); // Stop loading once state is determined
+            setLoading(false);
         });
 
-        return () => unsubscribe(); // Cleanup listener on component unmount
+        return () => unsubscribe();
     }, []);
 
     return (
