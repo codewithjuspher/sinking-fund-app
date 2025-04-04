@@ -1,23 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import placeholderProfileImage from "@/assets/images/place-holder.jpg";
-
-interface User {
-    name: string;
-    email: string;
-    profileImage: string;
-    sinkingFundId?: string | null;
-}
-
-interface UserContextProps {
-    user: User | null;
-    setUser: React.Dispatch<React.SetStateAction<User | null>>;
-}
+import { UserInterface, UserContextProps } from "@/types";
 
 const UserContext = createContext<UserContextProps | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<UserInterface | null>(null);
 
     useEffect(() => {
         const auth = getAuth();
@@ -25,25 +14,22 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const unsubscribe = onAuthStateChanged(
             auth,
             (firebaseUser) => {
-                try {
-                    if (firebaseUser) {
-                        const userDetails: User = {
-                            name: firebaseUser.displayName || "Guest",
-                            email: firebaseUser.email || "No Email",
-                            profileImage: firebaseUser.photoURL?.trim() || placeholderProfileImage, 
-                            sinkingFundId: null, 
-                        };
-                        setUser(userDetails);
-                    } else {
-                        setUser(null);
-                    }
-                } catch (error) {
-                    console.error("Error handling Firebase user data:", error);
+                if (firebaseUser) {
+                    const { displayName, email, photoURL } = firebaseUser;
+                    const userDetails: UserInterface = {
+                        name: displayName?.trim() || "Guest",
+                        email: email?.trim() || "No Email",
+                        profileImage: photoURL?.trim() || placeholderProfileImage,
+                        sinkingFundId: null,
+                    };
+                    setUser(userDetails);
+                } else {
                     setUser(null);
                 }
             },
             (error) => {
-                console.error("Error with Firebase Authentication:", error);
+                console.error("Firebase Authentication Error:", error);
+                setUser(null);
             }
         );
 
@@ -57,6 +43,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
 };
 
+// Hook to use UserContext safely
 export const useUser = (): UserContextProps => {
     const context = useContext(UserContext);
     if (!context) {

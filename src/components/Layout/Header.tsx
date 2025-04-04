@@ -1,14 +1,7 @@
-import Button from "@/components/UI/Button";
+import { Button } from "@/components";
 import "@/styles/components/header.css";
+import { HeaderProps } from "@/types";
 import React from "react";
-
-interface HeaderProps {
-    organizationName: string;
-    userName: string;
-    userEmail: string;
-    userProfileImage: string;
-    onLogout: () => void;
-}
 
 const Header: React.FC<HeaderProps> = ({
     organizationName,
@@ -27,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({
                     <p className="user-email">{userEmail}</p>
                 </div>
                 <img
-                   src={profileImage}
+                    src={profileImage}
                     alt={`${userName}'s profile`}
                     className="user-profile-picture"
                     loading="lazy"

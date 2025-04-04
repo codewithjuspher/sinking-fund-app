@@ -1,5 +1,4 @@
-import Button from "@/components/UI/Button";
-import Input from "@/components/UI/Input";
+import { Button, Input } from "@/components";
 import { registeredOrganizations } from "@/modules/main/components/users/data/mockData";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,31 +6,50 @@ import "../styles/RoleSelectorPage.css";
 
 const RoleSelectorPage: React.FC = () => {
     const [sinkingFundId, setSinkingFundId] = useState<string>("");
-    const [error, setError] = useState<string>(""); 
+    const [error, setError] = useState<string>("");
     const navigate = useNavigate();
 
+    /**
+     * Validates the sinkingFundId and checks if it exists in registered organizations.
+     */
     const isValidOrganization = (id: string): boolean => {
-        return registeredOrganizations.some((org) => org.id === id);
+        return registeredOrganizations.some((org) => org.id === id.trim());
     };
 
-    const handleJoinSinkingFund = async () => {
+    /**
+     * Handles the event of joining an existing sinking fund.
+     */
+    const handleJoinSinkingFund = () => {
         setError("");
 
-        if (!sinkingFundId.trim()) {
+        const trimmedId = sinkingFundId.trim();
+
+        if (!trimmedId) {
             setError("Please provide a valid Sinking Fund ID.");
             return;
         }
 
-        if (isValidOrganization(sinkingFundId.trim())) {
-            navigate(`/organization/${sinkingFundId.trim()}`);
+        if (isValidOrganization(trimmedId)) {
+            navigate(`/sinking-fund/${trimmedId}`);
         } else {
             setError("The provided Sinking Fund Link does not exist.");
         }
     };
 
+    /**
+     * Handles the event of creating a new sinking fund organization.
+     */
     const handleCreateNewOrganization = () => {
         setError("");
-        navigate("/create-organization")
+        navigate("/create-sinking-fund");
+    };
+
+    /**
+     * Handles input changes and error clearance.
+     */
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSinkingFundId(e.target.value);
+        if (error) setError("");
     };
 
     return (
@@ -43,11 +61,8 @@ const RoleSelectorPage: React.FC = () => {
                     label="Sinking Fund Link"
                     type="text"
                     value={sinkingFundId}
-                    onChange={(e) => {
-                        setSinkingFundId(e.target.value);
-                        if (error) setError("");
-                    }}
-                    placeholder=""
+                    onChange={handleInputChange}
+                    placeholder="Enter your Sinking Fund ID"
                     className={`input-field ${error ? "input-error" : ""}`}
                 />
                 {error && <p className="error-message">{error}</p>}

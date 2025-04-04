@@ -1,6 +1,6 @@
 import React from "react";
 import SSOProvider from "@/modules/main/components/users/components/SSOProvider";
-import Card from "@/components/UI/Card";
+import { Card } from "@/components";
 import "../styles/LoginPage.css"
 
 const LoginPage: React.FC = () => {

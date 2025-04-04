@@ -1,5 +1,5 @@
-import { tokenHandler } from "@/helpers/tokenHelpers";
-import { auth } from "@/shared/firebase/auth";
+import { tokenHandler } from "@/helpers";
+import { auth } from "@/shared";
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
 export const signInWithGoogle = async () => {
@@ -52,7 +52,7 @@ export const logoutUser = async () => {
     await signOut(auth);
     localStorage.removeItem("tokenExpirationTime");
     localStorage.removeItem("authToken");
-    window.location.href = "/";
+    window.location.href = "/login";
   } catch (error) {
     console.error("Error during logout:", error);
     alert("Failed to log out. Please try again.");

@@ -1,42 +1,88 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useMemo } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { MenuItemProps } from "@/types";
 import styles from "@/styles/sidebar.module.css";
+import { motion } from "framer-motion";
 
-interface MenuItemProps {
-    name: string;
-    href?: string;
-    children?: MenuItemProps[];
-    activeParent?: string | null;
-    toggleDropdown?: (parentName: string) => void;
-}
+const MenuItem: React.FC<MenuItemProps> = ({
+    name,
+    path,
+    children,
+    activeParent,
+    toggleDropdown,
+    sinkingId,
+}) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
 
-const MenuItem: React.FC<MenuItemProps> = ({ name, children, activeParent, toggleDropdown }) => {
-    const isActive = activeParent === name;
+    const activePage = useMemo(() => params.get("page"), [location.search]);
+
+    const isParentActive =
+        activeParent === name ||
+        path === activePage ||
+        children?.some(child => child.path === activePage);
+
+    const isSubmenuActive = (submenuPath: string | undefined) => submenuPath === activePage;
+
+    /**
+     * Handle parent menu click (toggle dropdown and navigate).
+     */
+    const handleParentClick = () => {
+        if (isParentActive) {
+            toggleDropdown?.(null);
+        } else {
+            toggleDropdown?.(name);
+            if (path) {
+                navigate(`/sinking-fund/${sinkingId}?page=${path}`);
+            }
+        }
+    };
+    /**
+     * Handle submenu click (navigate and keep parent dropdown open).
+     */
+    const handleSubmenuClick = (submenuPath?: string) => {
+        if (submenuPath) {
+            toggleDropdown?.(name);
+            navigate(`/sinking-fund/${sinkingId}?page=${submenuPath}`);
+        }
+    };
 
     return (
-        <li className={styles.menuItem}>
+        <li className={`${styles.menuItem} ${isParentActive ? styles.active : ""}`}>
+            {/* Parent Menu */}
             <div
-                onClick={() => toggleDropdown?.(name)}
-                className={`${styles.menuLink} ${isActive ? styles.active : ""}`}
+                onClick={handleParentClick}
+                className={`${styles.menuLink} ${isParentActive ? styles.active : ""}`}
             >
                 {name}
             </div>
-            {Array.isArray(children) && children.length > 0 && isActive && (
+
+            {/* Submenu */}
+            {Array.isArray(children) && children.length > 0 && isParentActive && (
                 <motion.ul
                     className={styles.subMenuList}
                     role="menu"
-                    aria-expanded={isActive}
+                    aria-expanded={isParentActive}
                     initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
+                    animate={{ opacity: isParentActive ? 1 : 0, height: isParentActive ? "auto" : 0 }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                     style={{ overflow: "hidden" }}
                 >
                     {children.map((child) => (
-                        <li key={child.name} className={styles.subMenuItem}>
-                            <a href={child.href || "#"} className={styles.subMenuLink}>
+                        <li
+                            key={child.name}
+                            className={`${styles.subMenuItem} ${isSubmenuActive(child.path) ? styles.active : ""
+                                }`}
+                        >
+                            <div
+                                onClick={() => handleSubmenuClick(child.path)}
+                                className={`${styles.subMenuLink} ${isSubmenuActive(child.path) ? styles.active : ""
+                                    }`}
+                            >
                                 {child.name}
-                            </a>
+                            </div>
                         </li>
                     ))}
                 </motion.ul>

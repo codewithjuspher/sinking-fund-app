@@ -1,15 +1,6 @@
 import React from "react";
 import "@/styles/components/input.css";
-
-interface InputProps {
-    label: string;
-    type?: 'text' | 'password' | 'email' | 'number';
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    placeholder?: string;
-    className?: string;
-    style?: React.CSSProperties;
-}
+import { InputProps } from "@/types";
 
 const Input: React.FC<InputProps> = ({
     label,

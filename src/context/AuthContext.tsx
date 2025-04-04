@@ -1,12 +1,7 @@
-import { auth } from "@/shared/firebase/auth";
+import { auth } from "@/shared";
 import { User } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
-
-interface AuthContextProps {
-    isAuthenticated: boolean;
-    user: User | null;
-    loading: boolean;
-}
+import { AuthContextProps } from "@/types";
 
 export const AuthContext = createContext<AuthContextProps>({
     isAuthenticated: false,

@@ -1,9 +1,11 @@
+import placeholderProfileImage from "@/assets/images/place-holder.jpg";
+import Button from "@/components/UI/Button";
+import { useUser } from "@/context/UserContext"; // Adjusted import
+import { registeredUsers } from "@/modules/main/components/users/data/mockData";
+import { signInWithGoogle } from "@/modules/main/components/users/services/authService";
+import { UserInterface } from "@/types"; // Already correct
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signInWithGoogle } from "@/modules/main/components/users/services/authService";
-import { registeredUsers } from "@/modules/main/components/users/data/mockData";
-import { useUser } from "@/context/UserContext"; // Import UserContext
-import Button from "@/components/UI/Button";
 import "../styles/SSOProvider.css";
 
 const SSOProvider: React.FC = () => {
@@ -11,41 +13,73 @@ const SSOProvider: React.FC = () => {
   const { setUser } = useUser();
   const [loading, setLoading] = useState(false);
 
-  const handleGoogleSignIn = async () => {
+  /**
+   * Handles Google Sign-In process.
+   */
+  const handleGoogleSignIn = async (): Promise<void> => {
+    setLoading(true);
     try {
-        setLoading(true);
-        const user = await signInWithGoogle();
+      const user = await signInWithGoogle();
+      validateUser(user);
 
-        if (!user.email || !user.displayName || !user.photoURL) {
-            throw new Error("Incomplete user details returned from Google.");
-        }
+      const email = user.email ?? "No Email";
+      const registeredUser = findRegisteredUser(email);
 
-        const registeredUser = registeredUsers.find((u) => u.email === user.email);
+      const userDetails: UserInterface = {
+        name: user.displayName ?? "Guest",
+        email: email,
+        profileImage: user.photoURL ?? placeholderProfileImage,
+        sinkingFundId: registeredUser?.sinkingFundId || null,
+      };
 
-        const userDetails = {
-            name: user.displayName,
-            email: user.email,
-            profileImage: user.photoURL,
-            sinkingFundId: registeredUser?.sinkingFundId || null,
-        };
-
-        setUser(userDetails);
-
-        if (registeredUser) {
-            navigate(`/organization/${registeredUser.sinkingFundId}`);
-        } else {
-            navigate("/path");
-        }
+      setUser(userDetails);
+      navigateToDashboard(registeredUser);
     } catch (error) {
-        if (error instanceof Error) {
-            alert(`Failed to sign in. ${error.message}`);
-        } else {
-            alert("Failed to sign in due to an unknown error.");
-        }
+      handleError(error);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
+
+  /**
+   * Validates the user object returned by Google.
+   */
+  const validateUser = (user: any): void => {
+    if (!user.email || !user.displayName || !user.photoURL) {
+      throw new Error("Incomplete user details returned from Google.");
+    }
+  };
+
+  /**
+   * Finds a registered user by email.
+   */
+  const findRegisteredUser = (email: string): { sinkingFundId?: string } | undefined => {
+    return registeredUsers.find((u) => u.email === email);
+  };
+
+  /**
+   * Navigates to the appropriate dashboard based on user status.
+   */
+  const navigateToDashboard = (registeredUser: { sinkingFundId?: string } | undefined): void => {
+    if (registeredUser?.sinkingFundId) {
+      navigate(`/sinking-fund/${registeredUser.sinkingFundId}`);
+    } else {
+      navigate("/sinking-fund");
+    }
+  };
+
+  /**
+   * Handles error during Google Sign-In.
+   */
+  const handleError = (error: unknown): void => {
+    if (error instanceof Error) {
+      console.error("Google Sign-In Error:", error);
+      alert(`Failed to sign in: ${error.message}`);
+    } else {
+      console.error("Unknown error occurred during Google Sign-In");
+      alert("An unknown error occurred during sign-in.");
+    }
+  };
 
   return (
     <div className="sso-provider-container">

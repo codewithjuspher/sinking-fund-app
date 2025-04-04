@@ -1,12 +1,10 @@
 import placeholderProfileImage from "@/assets/images/place-holder.jpg";
-import Footer from "@/components/Layout/Footer";
-import Header from "@/components/Layout/Header";
-import Sidebar from "@/components/Layout/Sidebar";
-import { useUser } from "@/context/UserContext";
+import { Footer, Header, Sidebar } from "@/components";
+import { useUser } from "@/context";
 import { getAuth } from "firebase/auth";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../styles/OrganizationPage.css";
+import "./OrganizationPage.css";
 
 const OrganizationPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -17,7 +15,7 @@ const OrganizationPage: React.FC = () => {
         const auth = getAuth();
         await auth.signOut();
         setUser(null);
-        navigate("/");
+        navigate("/login");
     };
 
     if (!id) {
@@ -34,7 +32,7 @@ const OrganizationPage: React.FC = () => {
                 onLogout={handleLogout}
             />
             <div className="main-content">
-                <Sidebar />
+                <Sidebar sinkingId={id} />
                 <div className="content-area">
                     {/* Main content can go here */}
                     <h2>Organization ID: {id}</h2>

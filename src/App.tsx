@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout/Layout";
-import PrivateRoute from "@/components/Private/PrivateRoute";
+import PrivateRoute from "@/components/PrivateRoute/PrivateRoute";
 import { AuthProvider } from "@/context/AuthContext";
 import CreateOrganizationPage from "@/modules/main/components/users/pages/CreateOrganizationPage";
 import LoginPage from "@/modules/main/components/users/pages/LoginPage";
@@ -18,9 +18,9 @@ const App: React.FC = () => {
                 <BrowserRouter>
                     <Layout>
                         <Routes>
-                            <Route path="/" element={<LoginPage />} />
+                            <Route path="/login" element={<LoginPage />} />
                             <Route
-                                path="/path"
+                                path="/sinking-fund"
                                 element={
                                     <PrivateRoute>
                                         <RoleSelectorPage />
@@ -28,7 +28,7 @@ const App: React.FC = () => {
                                 }
                             />
                             <Route
-                                path="/organization/:id"
+                                path="/sinking-fund/:id"
                                 element={
                                     <PrivateRoute>
                                         <OrganizationPage />
@@ -36,7 +36,7 @@ const App: React.FC = () => {
                                 }
                             />
                             <Route
-                                path="/create-organization"
+                                path="/create-sinking-fund"
                                 element={
                                     <PrivateRoute>
                                         <CreateOrganizationPage />
