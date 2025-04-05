@@ -1,9 +1,12 @@
 import placeholderProfileImage from "@/assets/images/place-holder.jpg";
+import sinkingLogo from "@/assets/images/sinking-fund-logo.png";
 import Button from "@/components/UI/Button";
-import { useUser } from "@/context/UserContext"; // Adjusted import
+import { useUser } from "@/context/UserContext";
 import { registeredUsers } from "@/modules/main/components/users/data/mockData";
 import { signInWithGoogle } from "@/modules/main/components/users/services/authService";
-import { UserInterface } from "@/types"; // Already correct
+import { UserInterface } from "@/types";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/SSOProvider.css";
@@ -83,7 +86,12 @@ const SSOProvider: React.FC = () => {
 
   return (
     <div className="sso-provider-container">
-      <h1 className="sso-provider-title">Welcome to Sinking Fund Portal</h1>
+      <img
+        src={sinkingLogo}
+        alt="Sinking Fund Portal Logo"
+        className="sso-provider-image"
+      />
+      <h1 className="sso-provider-title">Sinking Fund Portal</h1>
       <Button
         type="button"
         onClick={handleGoogleSignIn}
@@ -91,8 +99,11 @@ const SSOProvider: React.FC = () => {
         ariaLabel="Continue with Google"
         className="sso-button"
       >
-        <span className="flex items-center gap-2">Continue with Google</span>
+        <FontAwesomeIcon icon={faGoogle} /> Continue with Google
       </Button>
+      <p className="sso-note">
+        Use your registered Google account to sign in and access the homepage effortlessly.
+      </p>
     </div>
   );
 };

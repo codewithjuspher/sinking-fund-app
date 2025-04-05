@@ -1,0 +1,175 @@
+/* =======================
+   Sidebar Container
+   ======================= */
+   .sidebar {
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    background-color: var(--primary-active-text);
+    padding: 1rem;
+    padding-top: 8rem;
+    border-right: 1px solid var(--neutral-hover);
+    transition: width 0.3s ease-in-out; /* Smooth width transitions */
+    height: auto;
+}
+
+/* Collapsed Sidebar for Mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+/* =======================
+   Menu List and Items
+   ======================= */
+.menuList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 220px; /* Restricts the menu width */
+}
+
+.menuItem {
+    margin-bottom: 1rem; /* Spacing between menu items */
+}
+
+/* =======================
+   Parent Menu Link Styling
+   ======================= */
+.menuLink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: var(--font-size-large);
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color var(--transition-speed), color var(--transition-speed); /* Smooth hover transitions */
+}
+
+.menuLink:hover {
+    background-color: var(--primary-hover);
+    color: var(--secondary-color); /* Visual feedback on hover */
+}
+
+/* Active Parent Menu Link */
+.menuLink.active {
+    background-color: var(--primary-active-background);
+    color: var(--primary-active-text);
+    font-weight: bold;
+    border-left: 4px solid var(--secondary-color); /* Active indicator */
+}
+
+/* =======================
+   Submenu Styling
+   ======================= */
+.subMenuList {
+    padding-top: 0.5rem;
+    padding-left: 1rem;
+    list-style: none;
+    width: 100%;
+    margin: 0;
+}
+
+.subMenuItem {
+    margin-bottom: 0.5rem;
+}
+
+/* Submenu Link Styling */
+.subMenuLink {
+    display: block;
+    padding: 0.25rem 1rem;
+    font-size: var(--font-size-small);
+    color: var(--neutral-text);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-speed), color var(--transition-speed); /* Smooth hover and color changes */
+}
+
+.subMenuLink:hover {
+    background-color: var(--neutral-hover);
+    color: var(--secondary-color);
+}
+
+/* Active Submenu Link */
+.subMenuLink.active {
+    background-color: var(--primary-hover);
+    color: var(--secondary-color);
+    font-weight: bold;
+    border-left: 4px solid var(--primary-color); /* Active indicator */
+}
+
+/* Active Submenu Item Container */
+.subMenuItem.active {
+    background-color: var(--submenu-background); /* Highlight active submenu */
+}
+
+/* =======================
+   Icon Styling
+   ======================= */
+.menuText {
+    flex-grow: 1; /* Ensures text takes up available space */
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconChevron {
+    font-size: 1rem;
+    color: var(--secondary-color); /* Default icon color */
+    transition: color 0.3s ease-in-out; /* Smooth transitions for color changes */
+}
+
+/* Active Icon Styling */
+.iconActive {
+    color: var(--primary-active-text); /* Active icon color */
+}
+
+/* =======================
+   Toggle Button
+   ======================= */
+.toggleButton {
+    align-self: flex-end;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; /* Rotate and color changes */
+}
+
+.toggleButton:hover {
+    color: var(--secondary-color); /* Visual feedback on hover */
+}
+
+/* =======================
+   Mobile Styles
+   ======================= */
+@media (max-width: 768px) {
+    .menuLink {
+        font-size: var(--font-size-medium);
+        padding: 0.25rem 0.5rem; /* Adjust spacing for smaller screens */
+    }
+
+    .subMenuLink {
+        font-size: var(--font-size-extra-small); /* Smaller font for mobile */
+    }
+
+    .menuList,
+    .subMenuList {
+        padding-left: 0.5rem;
+        width: 150px; /* Adjust width for mobile */
+    }
+}

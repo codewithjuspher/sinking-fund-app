@@ -1,11 +1,11 @@
 import { MENU_ITEM_PARENT, MENU_ITEM_CHILDREN } from "@/shared";
 
 export const MENU_ITEMS = (sinkingId: string) => [
-    { id: "dashboard", path:"dashboard", name: MENU_ITEM_PARENT.DASHBOARD, sinkingId },
-    { id: "wallet-balance", path:"wallet-balance", name: MENU_ITEM_PARENT.WALLET_BALANCE, sinkingId },
+    { id: "dashboard", path: "dashboard", name: MENU_ITEM_PARENT.DASHBOARD, sinkingId },
+    { id: "wallet-balance", path: "wallet-balance", name: MENU_ITEM_PARENT.WALLET_BALANCE, sinkingId },
     {
         id: "contributions",
-        path:"contributions",
+        path: "contributions",
         name: MENU_ITEM_PARENT.CONTRIBUTIONS,
         sinkingId,
         children: [
@@ -16,7 +16,7 @@ export const MENU_ITEMS = (sinkingId: string) => [
     },
     {
         id: "loans",
-        path:"loans",
+        path: "loans",
         name: MENU_ITEM_PARENT.LOANS,
         sinkingId,
         children: [
@@ -27,7 +27,7 @@ export const MENU_ITEMS = (sinkingId: string) => [
     },
     {
         id: "payments",
-        path:"payments",
+        path: "payments",
         name: MENU_ITEM_PARENT.PAYMENTS,
         sinkingId,
         children: [
@@ -38,7 +38,7 @@ export const MENU_ITEMS = (sinkingId: string) => [
     },
     {
         id: "receipts",
-        path:"receipts",
+        path: "receipts",
         name: MENU_ITEM_PARENT.RECEIPTS,
         sinkingId,
         children: [
@@ -48,7 +48,7 @@ export const MENU_ITEMS = (sinkingId: string) => [
     },
     {
         id: "members",
-        path:"members",
+        path: "members",
         name: MENU_ITEM_PARENT.MEMBERS,
         sinkingId,
         children: [
@@ -58,7 +58,7 @@ export const MENU_ITEMS = (sinkingId: string) => [
     },
     {
         id: "goals",
-        path:"goals",
+        path: "goals",
         name: MENU_ITEM_PARENT.GOALS,
         sinkingId,
         children: [
@@ -68,7 +68,7 @@ export const MENU_ITEMS = (sinkingId: string) => [
     },
     {
         id: "violations",
-        path:"violations",
+        path: "violations",
         name: MENU_ITEM_PARENT.VIOLATIONS,
         sinkingId,
         children: [
@@ -78,7 +78,7 @@ export const MENU_ITEMS = (sinkingId: string) => [
     },
     {
         id: "reports",
-        path:"reports",
+        path: "reports",
         name: MENU_ITEM_PARENT.REPORTS,
         sinkingId,
         children: [
@@ -89,7 +89,7 @@ export const MENU_ITEMS = (sinkingId: string) => [
     },
     {
         id: "settings",
-        path:"settings",
+        path: "settings",
         name: MENU_ITEM_PARENT.SETTINGS,
         sinkingId,
         children: [

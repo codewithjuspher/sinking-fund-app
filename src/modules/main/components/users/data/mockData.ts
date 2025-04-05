@@ -1,5 +1,5 @@
 export const registeredOrganizations = [
-    { id: "SF123", name: "Alpha Corp", creator: "John Doe" },
+    { id: "MLHUILLIER", name: "Alpha Corp", creator: "John Doe" },
     { id: "SF456", name: "Beta Systems", creator: "Jane Smith" },
     { id: "ORG789", name: "Gamma Enterprises", creator: "Alice Williams" },
     { id: "ORG321", name: "Delta Solutions", creator: "Bob Brown" },
@@ -9,7 +9,7 @@ export const registeredOrganizations = [
 export const registeredUsers = [
     {
         email: "juspher.balangyao@mlhuillier.com",
-        sinkingFundId: "SF123",
+        sinkingFundId: "MLHUILLIER",
         organizationName: "Alpha Corp",
         userRole: "Admin",
     },

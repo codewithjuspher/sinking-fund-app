@@ -1,0 +1,72 @@
+/* =======================
+   SSO Button Styling
+   ======================= */
+/* Styling for the main Single Sign-On (SSO) button */
+.sso-button {
+    width: 100%; /* Full width of the container */
+    padding: 0.5rem 1rem; /* Internal spacing for better clickability */
+    border-radius: 0.5rem; /* Rounded corners for visual appeal */
+    background-color: #007bff; /* Default blue background color */
+    color: white; /* White text for contrast */
+    font-size: 1rem; /* Standard button font size */
+    font-weight: 600; /* Semi-bold text for emphasis */
+    transition: background-color 0.3s ease-in-out; /* Smooth color change on hover */
+    border: none; /* Removes default browser borders */
+    cursor: pointer; /* Indicates button is clickable */
+}
+
+/* Hover effect for the SSO button */
+.sso-button:hover {
+    background-color: #0056b3; /* Darker shade of blue for hover state */
+}
+
+/* Disabled state for the SSO button */
+.sso-button:disabled {
+    background-color: #b0b0b0; /* Gray background for disabled state */
+    cursor: not-allowed; /* Indicates button cannot be clicked */
+}
+
+/* =======================
+   Spinner Container
+   ======================= */
+/* Wrapper for spinner and loading text inside the button */
+.sso-button-spinner {
+    display: flex; /* Flex layout for alignment */
+    align-items: center; /* Centers elements vertically */
+    justify-content: center; /* Centers elements horizontally */
+    gap: 0.5rem; /* Space between spinner and text */
+}
+
+/* =======================
+   Spinner Text Styling
+   ======================= */
+/* Styling for the text displayed alongside the spinner */
+.button-spinner {
+    display: flex; /* Flex layout for alignment */
+    align-items: center; /* Centers text vertically */
+    font-size: 0.875rem; /* Slightly smaller font size for subtle emphasis */
+    color: #555; /* Neutral text color */
+}
+
+/* =======================
+   Spinner Animation
+   ======================= */
+/* Circular spinner styling */
+.spinner-border {
+    height: 1rem; /* Fixed height of the spinner */
+    width: 1rem; /* Fixed width of the spinner */
+    border: 2px solid transparent; /* Transparent borders for a clean look */
+    border-top: 2px solid #3182ce; /* Active color for spinner movement */
+    border-radius: 50%; /* Makes the spinner circular */
+    animation: spin 0.8s linear infinite; /* Infinite spinning effect */
+}
+
+/* Spinner Animation Keyframes */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg); /* Starting position */
+    }
+    100% {
+        transform: rotate(360deg); /* Full rotation */
+    }
+}

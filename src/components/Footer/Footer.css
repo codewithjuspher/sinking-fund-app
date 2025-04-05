@@ -1,0 +1,10 @@
+/* =======================
+   Footer Styling
+   ======================= */
+footer {
+    background-color: #0a59ad; /* Sets the background color to a custom blue shade for branding */
+    color: #fff; /* Ensures text is white for contrast and readability */
+    text-align: center; /* Centers the text within the footer */
+    padding: 1rem; /* Adds padding for spacing inside the footer */
+    margin-top: auto; /* Pushes the footer to the bottom of the page, maintaining a consistent layout */
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import '@/styles/components/card.css';
+import './Card.css';
 import { CardProps } from "@/types";
 
 const Card: React.FC<CardProps> = ({ children, className = 'card', style = {} }) => (

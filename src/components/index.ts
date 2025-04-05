@@ -1,9 +1,13 @@
-export { default as Footer } from './Layout/Footer';
-export { default as Header } from './Layout/Header';
+export { default as Content } from './Content/Content';
+export { default as Footer } from './Footer/Footer';
+export { default as Header } from './Header/Header';
 export { default as Layout } from './Layout/Layout';
-export { default as MenuItem } from './Layout/MenuItem';
-export { default as Sidebar } from './Layout/Sidebar';
+export { default as MenuItem } from './Sidebar/MenuItem';
+export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';
 export { default as Button } from './UI/Button';
 export { default as Card } from './UI/Card';
 export { default as Input } from './UI/Input';
+export { default as ErrorBoundary } from "./ErrorBoundary/ErrorBoundary";
+export { default as CustomFallback } from "./CustomFallback/CustomFallback";
+export { default as Loading } from "./Loading/Loading";

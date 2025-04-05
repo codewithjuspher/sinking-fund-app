@@ -1,8 +1,9 @@
 export interface MenuItemProps {
     name: string;
     path?: string;
-    children?: MenuItemProps[];
+    children?: { name: string; path: string; sinkingId: string }[];
     activeParent?: string | null;
+    activeChild: string | null;
     toggleDropdown?: (parentName: string | null) => void;
     sinkingId: string;
 }

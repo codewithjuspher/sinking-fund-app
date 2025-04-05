@@ -1,0 +1,14 @@
+/* =======================
+   Content Styles
+   ======================= */
+/* Defines the primary content area with flexible, centered alignment and visual styling */
+.content-area {
+    flex-grow: 1; /* Expands to fill available space in a flex container */
+    display: flex; /* Enables flexbox for layout control */
+    align-items: center; /* Vertically centers content */
+    justify-content: center; /* Horizontally centers content */
+    padding: 20px; /* Adds spacing inside the content area */
+    background-color: #ffffff; /* Sets the background to white */
+    border-radius: 8px; /* Applies rounded corners for softer visuals */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+}

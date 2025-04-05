@@ -62,7 +62,7 @@ const RoleSelectorPage: React.FC = () => {
                     type="text"
                     value={sinkingFundId}
                     onChange={handleInputChange}
-                    placeholder="Enter your Sinking Fund ID"
+                    placeholder="Enter your Invitation Link"
                     className={`input-field ${error ? "input-error" : ""}`}
                 />
                 {error && <p className="error-message">{error}</p>}

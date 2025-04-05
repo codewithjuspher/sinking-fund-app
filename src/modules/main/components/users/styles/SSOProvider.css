@@ -13,3 +13,20 @@
     color: #333;
     margin-bottom: 1.5rem;
 }
+
+.sso-provider-image {
+    max-width: 100px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+}
+
+.sso-note {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #6c757d;
+    text-align: center;
+    line-height: 1.4;
+}

@@ -1,39 +1,48 @@
+/* =======================
+   Loading Container
+   ======================= */
+/* Centralized container for the loading screen */
 .loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f9f9f9;
-    color: #333;
-    text-align: center;
-    font-family: Arial, sans-serif;
+    display: flex; /* Flexbox layout for alignment */
+    flex-direction: column; /* Stacks child elements vertically */
+    align-items: center; /* Horizontally centers content */
+    justify-content: center; /* Vertically centers content */
+    height: 100vh; /* Full viewport height */
+    background-color: #f9f9f9; /* Light background for contrast */
+    color: #333; /* Default text color */
+    text-align: center; /* Centers text alignment */
+    font-family: Arial, sans-serif; /* Sets a clean, modern font */
 }
 
-/* Spinner */
+/* =======================
+   Spinner Styles
+   ======================= */
+/* Styles for the circular loading spinner */
 .spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f3f3f3;
-    border-top: 5px solid #2563eb;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+    width: 50px; /* Fixed width of the spinner */
+    height: 50px; /* Fixed height of the spinner */
+    border: 5px solid #f3f3f3; /* Light gray border */
+    border-top: 5px solid #2563eb; /* Blue border for the spinner's "active" portion */
+    border-radius: 50%; /* Makes the spinner circular */
+    animation: spin 1s linear infinite; /* Infinite rotation animation */
 }
 
 /* Spinner Animation */
 @keyframes spin {
     0% {
-        transform: rotate(0deg);
+        transform: rotate(0deg); /* Starting position */
     }
-
     100% {
-        transform: rotate(360deg);
+        transform: rotate(360deg); /* Completes one full rotation */
     }
 }
 
-/* Loading Message */
+/* =======================
+   Loading Message Styles
+   ======================= */
+/* Text styling for the loading message */
 .loading-message {
-    margin-top: 1rem;
-    font-size: 1.2rem;
-    color: #666;
+    margin-top: 1rem; /* Space above the message */
+    font-size: 1.2rem; /* Slightly larger font for readability */
+    color: #666; /* Subtle gray text for secondary emphasis */
 }
